@@ -14,6 +14,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Adsterra — Social Bar / Push notifications (loads on homepage) -->
+  <script src="https://pl30188057.effectivecpmnetwork.com/f6/a6/cc/f6a6cc5685d8ea8a15db0c992d5f8b75.js"></script>
 </head>
 <body>
   <div class="app-shell">
@@ -64,6 +67,12 @@
 
         <!-- Blog list -->
         <div id="blog-list"></div>
+
+        <!-- Adsterra Native Banner — appears at the bottom of the blog list -->
+        <div id="home-ad-slot" style="max-width:1152px;margin:40px auto 0;padding:0 0">
+          <p style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:8px;text-align:center">Advertisement</p>
+          <div id="container-054d6b8fc4d6249f8d67f75e129e17e1" style="text-align:center"></div>
+        </div>
       </div>
     </main>
 
@@ -72,6 +81,9 @@
 
   <!-- Toast container -->
   <div class="toast-container" id="toast-container"></div>
+
+  <!-- Adsterra Native Banner script — loads after the page renders -->
+  <script async="async" data-cfasync="false" src="https://pl30188056.effectivecpmnetwork.com/054d6b8fc4d6249f8d67f75e129e17e1/invoke.js"></script>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
