@@ -1,4 +1,9 @@
-
+/* ============================================================
+   Vocalinty — Blog detail page logic
+   Uses the increment_blog_view RPC (atomic view increment)
+   and renders Markdown content + Spotify embed + YouTube CTA.
+   Includes Adsterra Native Banner ad placement.
+   ============================================================ */
 
 window.VocalintyBlog = (function () {
   const I = window.VocalintyLayout.ICONS
@@ -46,12 +51,24 @@ window.VocalintyBlog = (function () {
     main.innerHTML = `
       <div style="max-width:672px;margin:96px auto;text-align:center;padding:0 20px">
         <p style="font-family:var(--font-serif);font-size:30px;font-style:italic">Entry not found.</p>
-        <a href="index.html" class="btn btn-outline" style="margin-top:24px">
+        <a href="/" class="btn btn-outline" style="margin-top:24px">
           ${I.arrowLeft} Back to the archive
         </a>
       </div>
     `
   }
+
+  // Adsterra Native Banner ad block
+  // Shown after blog content, before Spotify embed
+  const ADSTERRA_NATIVE_AD = `
+    <div class="adsterra-ad" style="max-width:672px;margin:40px auto 0;padding:0 20px">
+      <p style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:8px;text-align:center">Advertisement</p>
+      <div style="text-align:center">
+        <script async="async" data-cfasync="false" src="https://pl30188056.effectivecpmnetwork.com/054d6b8fc4d6249f8d67f75e129e17e1/invoke.js"><\/script>
+        <div id="container-054d6b8fc4d6249f8d67f75e129e17e1"></div>
+      </div>
+    </div>
+  `
 
   function renderBlog(blog) {
     const main = document.getElementById('blog-main')
@@ -103,6 +120,10 @@ window.VocalintyBlog = (function () {
       `
       : ''
 
+    // Build the article HTML — the Adsterra ad block is inserted
+    // AFTER the prose content but BEFORE the Spotify/YouTube sections.
+    // We use a placeholder div + inject the script after innerHTML is set,
+    // because innerHTML doesn't execute <script> tags.
     main.innerHTML = `
       <article class="blog-detail">
         <div class="container">
@@ -119,17 +140,42 @@ window.VocalintyBlog = (function () {
             ${blog.excerpt ? `<p class="blog-excerpt">${escapeHtml(blog.excerpt)}</p>` : ''}
           </header>
           <div class="prose">${html}</div>
+        </div>
+
+        <!-- Adsterra Native Banner — inserted here so it loads after content -->
+        <div id="adsterra-ad-slot"></div>
+
+        <div class="container">
           ${spotifyHtml}
           ${ytHtml}
           <div class="blog-detail__back-bottom">
-            <a href="index.html" class="btn btn-outline btn-block">${I.arrowLeft} Back to the archive</a>
+            <a href="/" class="btn btn-outline btn-block">${I.arrowLeft} Back to the archive</a>
           </div>
         </div>
       </article>
     `
 
+    // Inject the Adsterra Native Banner ad into the placeholder.
+    // We can't use innerHTML for scripts (browsers don't execute them),
+    // so we create the script element manually.
+    const adSlot = document.getElementById('adsterra-ad-slot')
+    if (adSlot) {
+      adSlot.innerHTML = `
+        <p style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:8px;text-align:center">Advertisement</p>
+        <div style="text-align:center">
+          <div id="container-054d6b8fc4d6249f8d67f75e129e17e1"></div>
+        </div>
+      `
+      // Create and append the Adsterra invoke.js script
+      const adScript = document.createElement('script')
+      adScript.async = true
+      adScript.setAttribute('data-cfasync', 'false')
+      adScript.src = 'https://pl30188056.effectivecpmnetwork.com/054d6b8fc4d6249f8d67f75e129e17e1/invoke.js'
+      adSlot.querySelector('div').appendChild(adScript)
+    }
+
     const backLink = document.getElementById('back-link')
-    if (backLink) backLink.addEventListener('click', function () { window.location.href = 'index.html' })
+    if (backLink) backLink.addEventListener('click', function () { window.location.href = '/' })
   }
 
   async function loadBlog(id) {
