@@ -154,7 +154,42 @@ window.VocalintyBlog = (function () {
         </div>
       </article>
     `
+   // Structured data for Google rich results
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": blog.title,
+  "description": blog.excerpt,
+  "datePublished": blog.createdAt,
+  "dateModified": blog.updatedAt || blog.createdAt,
+  "author": {
+    "@type": "Organization",
+    "name": "Vocalinty",
+    "url": "https://vocalinty.netlify.app"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Vocalinty",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://vocalinty.netlify.app/assets/VocalintyLogo2.png"
+    }
+  },
+  "image": blog.coverImage || "https://vocalinty.netlify.app/assets/VocalintyLogo2.png",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://vocalinty.netlify.app/blog?id=" + blog.id
+  }
+}
 
+const existingScript = document.getElementById('blog-structured-data')
+if (existingScript) existingScript.remove()
+
+const script = document.createElement('script')
+script.type = 'application/ld+json'
+script.id = 'blog-structured-data'
+script.textContent = JSON.stringify(structuredData)
+document.head.appendChild(script)
     // Inject the Adsterra Native Banner ad into the placeholder.
     // We can't use innerHTML for scripts (browsers don't execute them),
     // so we create the script element manually.
