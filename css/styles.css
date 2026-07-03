@@ -1497,3 +1497,47 @@ html.dark .footer-brand__logo { filter: invert(0); }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--muted-fg); }
+
+/* ---------- Ad sidebar (desktop only, fixed right side) ---------- */
+.ad-sidebar {
+  position: fixed;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+  display: none;
+  z-index: 30;
+}
+@media (min-width: 1440px) {
+  .ad-sidebar { display: block; }
+}
+.ad-sidebar__card {
+  border: 1px solid var(--border);
+  padding: 12px;
+  margin-bottom: 12px;
+  background: var(--bg);
+  min-height: 250px;
+}
+.ad-sidebar__label {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted-fg);
+  margin-bottom: 8px;
+  text-align: center;
+}
+.ad-sidebar__smart-link {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: box-shadow 0.25s ease;
+}
+.ad-sidebar__smart-link:hover {
+  box-shadow: 0 0 0 1px var(--fg), 0 0 18px -4px var(--fg);
+}
