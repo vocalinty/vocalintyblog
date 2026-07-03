@@ -15,7 +15,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 
- 
+  <!-- Adsterra — Social Bar (new) -->
+  <script src="https://pl30188460.effectivecpmnetwork.com/09/aa/9c/09aa9cdcebc1b8b79e79cb80a8cb327f.js"></script>
 </head>
 <body>
   <div class="app-shell">
@@ -67,10 +68,10 @@
         <!-- Blog list -->
         <div id="blog-list"></div>
 
-        <!-- Adsterra Native Banner — appears at the bottom of the blog list -->
-        <div id="home-ad-slot" style="max-width:1152px;margin:40px auto 0;padding:0 0">
+        <!-- Native Banner at bottom of blog list (mobile + desktop) -->
+        <div style="max-width:1152px;margin:40px auto 0">
           <p style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:8px;text-align:center">Advertisement</p>
-          <div id="container-054d6b8fc4d6249f8d67f75e129e17e1" style="text-align:center"></div>
+          <div id="container-054d6b8fc4d6249f8d67f75e129e17e1" style="text-align:center;min-height:90px"></div>
         </div>
       </div>
     </main>
@@ -78,10 +79,22 @@
     <div id="site-footer"></div>
   </div>
 
+  <!-- Ad sidebar (desktop only, 1440px+ wide screens) -->
+  <aside class="ad-sidebar">
+    <div class="ad-sidebar__card">
+      <p class="ad-sidebar__label">Advertisement</p>
+      <div id="sidebar-ad-container"></div>
+    </div>
+    <a href="https://www.effectivecpmnetwork.com/uzwn33bunr?key=1f548aa6d383a4d76d574d6ff09a2d2d"
+       target="_blank" rel="noopener noreferrer" class="ad-sidebar__smart-link">
+      Sponsored Link
+    </a>
+  </aside>
+
   <!-- Toast container -->
   <div class="toast-container" id="toast-container"></div>
 
-  <!-- Adsterra Native Banner script — loads after the page renders -->
+  <!-- Adsterra Native Banner script -->
   <script async="async" data-cfasync="false" src="https://pl30188056.effectivecpmnetwork.com/054d6b8fc4d6249f8d67f75e129e17e1/invoke.js"></script>
 
   <!-- Scripts -->
@@ -95,6 +108,15 @@
     document.addEventListener('DOMContentLoaded', function () {
       window.VocalintyLayout.render('home')
       window.VocalintyHome.init()
+      // After Adsterra invoke.js loads, it fills #container-054d6b8fc4d6249f8d67f75e129e17e1.
+      // Clone that ad into the sidebar container so desktop users see it on the side too.
+      setTimeout(function () {
+        var main = document.getElementById('container-054d6b8fc4d6249f8d67f75e129e17e1')
+        var side = document.getElementById('sidebar-ad-container')
+        if (main && side && main.innerHTML) {
+          side.innerHTML = main.innerHTML
+        }
+      }, 2000)
     })
   </script>
 </body>
