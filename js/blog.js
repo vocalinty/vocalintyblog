@@ -174,6 +174,15 @@ window.VocalintyBlog = (function () {
       adSlot.querySelector('div').appendChild(adScript)
     }
 
+    // After the ad loads, clone it into the sidebar (desktop only)
+    setTimeout(function () {
+      var main = document.getElementById('container-054d6b8fc4d6249f8d67f75e129e17e1')
+      var side = document.getElementById('sidebar-ad-container')
+      if (main && side && main.innerHTML) {
+        side.innerHTML = main.innerHTML
+      }
+    }, 2500)
+
     const backLink = document.getElementById('back-link')
     if (backLink) backLink.addEventListener('click', function () { window.location.href = '/' })
   }
