@@ -1,0 +1,29 @@
+{
+  "name": "Vocalinty — A Channel Journal",
+  "short_name": "Vocalinty",
+  "description": "Daily Viral News On Music. Music Playlists. Everythere Here!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#161616",
+  "icons": [
+    {
+      "src": "assets/VocalintyLogo2.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/VocalintyLogo2.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/VocalintyLogo2.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

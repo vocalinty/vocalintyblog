@@ -1,0 +1,18 @@
+# Netlify redirects — ensures clean URLs work without .html extension
+# These rules make /about resolve to /about.html, etc.
+# Netlify actually does this automatically, but these make it explicit.
+
+# Redirect /index to / (canonical)
+/index              /index.html    200
+/index.html         /              301
+
+# Clean URLs for info pages (Netlify auto-resolves /about → /about.html,
+# but we add explicit rules in case we switch hosts later)
+/about              /about.html    200
+/contact            /contact.html  200
+/privacy            /privacy.html  200
+/terms              /terms.html    200
+/blog               /blog.html     200
+
+# The admin page is unlisted — keep .html extension for it so it's not
+# guessable as /admin. Bookmark /admin.html directly.

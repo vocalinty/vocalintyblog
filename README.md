@@ -47,6 +47,8 @@ vocalinty-static/
 ├── terms.html          ← Terms of Service page
 ├── admin.html          ← Hidden admin panel (bookmark this)
 ├── README.md           ← This file
+├── manifest.json       ← PWA manifest (icon + theme color for mobile)
+├── _redirects          ← Netlify config for clean URLs (/about → /about.html)
 ├── css/
 │   └── styles.css      ← All site styling (edit colors, fonts, spacing here)
 ├── js/
@@ -61,8 +63,42 @@ vocalinty-static/
 │   ├── info.js         ← Shared layout for About/Contact/Privacy/Terms
 │   └── admin.js        ← Admin login + editor + toolbar + preview + list
 └── assets/
-    └── VocalintyLogo2.png  ← Channel logo (replace with your own)
+    └── VocalintyLogo2.png  ← Channel logo (used as favicon + header logo)
 ```
+
+---
+
+## Clean URLs (no .html in the address bar)
+
+All internal links use clean URLs:
+- Home: `/` (not `/index.html`)
+- About: `/about` (not `/about.html`)
+- Contact: `/contact`
+- Privacy: `/privacy`
+- Terms: `/terms`
+- Blog detail: `/blog?id=...`
+- Admin: `/admin.html` (kept as .html — it's the secret unlisted URL)
+
+These work automatically on Netlify, Vercel, Cloudflare Pages, and GitHub
+Pages. The `_redirects` file ensures Netlify resolves them correctly.
+
+---
+
+## Favicon + mobile app icon
+
+Every HTML page includes:
+```html
+<link rel="icon" type="image/png" href="assets/VocalintyLogo2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/VocalintyLogo2.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#161616">
+```
+
+This means:
+- **Browser tab** shows the Vocalinty logo next to the page title
+- **iPhone/iPad home screen** shows the logo when someone adds your site
+- **Android Chrome** shows a dark browser bar (matches dark mode)
+- **PWA install** lets users "Add to Home Screen" and it behaves like an app
 
 ---
 
@@ -83,10 +119,16 @@ These links are used in the header, footer, contact page, and about page.
 ### Change the contact email
 In `js/config.js`:
 ```js
-contactEmail: 'hello@vocalinty.com',
+contactEmail: 'vocalintyofficial@gmail.com',
 ```
-This is a placeholder. Replace it with your real email — it's used on the
-Contact page form and the "Direct Email" link.
+Used on the Contact page form and the "Direct Email" link.
+
+### Change the Buy Me a Coffee link
+In `js/config.js`:
+```js
+buyMeACoffee: 'https://buymeacoffee.com/vocalinty',
+```
+This is the permanent button in the top-right of every page's header.
 
 ### Change Supabase credentials
 In `js/config.js`:
@@ -127,8 +169,10 @@ under `html.dark { ... }`.
 
 ### Replace the logo
 Replace `assets/VocalintyLogo2.png` with your own logo. Keep the same
-filename, or update the references in `js/layout.js` (search for
-`VocalintyLogo2.png`).
+filename, or update the references in:
+- `js/layout.js` (header + footer logo)
+- Every HTML file's `<head>` section (favicon + apple-touch-icon)
+- `manifest.json` (PWA icon)
 
 ### Edit the Privacy Policy / Terms / About / Contact content
 Each page is a standalone HTML file:
@@ -161,18 +205,23 @@ Pick whichever you prefer:
 2. Drag the entire `vocalinty-static` folder onto the page
 3. Done. You get a public URL instantly.
 4. (Optional) Connect a custom domain in site settings.
+5. The `_redirects` file ensures clean URLs work automatically.
 
 ### GitHub Pages
 1. Create a new GitHub repository
 2. Upload all files from `vocalinty-static/` to the repo
+   (Note: GitHub's web uploader can't upload folders — use the `/` trick
+   to create folders, e.g. type `css/styles.css` as the filename)
 3. Go to Settings → Pages → Source → `main` branch → `/` root → Save
 4. Your site will be at `https://YOUR_USERNAME.github.io/YOUR_REPO/`
 
 ### Cloudflare Pages
-1. Go to https://dash.cloudflare.com → Pages → Create project
-2. Connect your GitHub repo (or upload directly)
-3. Build command: (leave empty)
-4. Output directory: `.` (or wherever you put the files)
+1. Go to https://dash.cloudflare.com → Workers & Pages → Create
+2. Click the **Pages** tab (NOT Workers) → Connect to Git
+3. Connect your GitHub repo
+4. Build command: (leave empty)
+5. Build output directory: `/`
+6. Deploy
 
 ### Vercel
 1. Go to https://vercel.com/new
@@ -241,6 +290,17 @@ will reject all login attempts.
 - Or the password in your database doesn't match what you're typing
 - Open browser dev tools → Console for the specific error
 
+### Favicon (logo) not showing on the browser tab
+- Make sure `assets/VocalintyLogo2.png` is uploaded to your host
+- Hard refresh: Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac)
+- Browsers cache favicons aggressively — try in incognito mode
+- Open `https://YOURSITE/assets/VocalintyLogo2.png` directly to verify it loads
+
+### Clean URLs don't work (e.g. /about shows 404)
+- On Netlify: make sure `_redirects` is in the root of your deployed folder
+- On GitHub Pages: clean URLs may not work — use `/about.html` instead
+- On Cloudflare Pages / Vercel: clean URLs work automatically
+
 ### Dark mode doesn't persist across pages
 - Make sure your browser allows localStorage (private/incognito mode blocks it)
 - Check that `js/theme.js` is loaded on every page (it is, by default)
@@ -252,6 +312,12 @@ will reject all login attempts.
 ### Images don't load
 - Cover image URLs must be absolute (https://...)
 - Some image hosts block hotlinking — try a different host (Unsplash works)
+
+### Site has no styling (plain unstyled HTML)
+- The `css/` and `js/` folders didn't upload to your host
+- GitHub's web uploader can't upload folders — use the `/` trick:
+  click "Create new file", type `css/styles.css`, paste the contents, commit
+- Or use GitHub Desktop which handles folders properly
 
 ---
 
