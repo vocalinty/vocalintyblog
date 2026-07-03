@@ -154,42 +154,76 @@ window.VocalintyBlog = (function () {
         </div>
       </article>
     `
-   // Structured data for Google rich results
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": blog.title,
-  "description": blog.excerpt,
-  "datePublished": blog.createdAt,
-  "dateModified": blog.updatedAt || blog.createdAt,
-  "author": {
-    "@type": "Organization",
-    "name": "Vocalinty",
-    "url": "https://vocalinty.netlify.app"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Vocalinty",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://vocalinty.netlify.app/assets/VocalintyLogo2.png"
+
+    // ===== SEO: Update document title + meta tags for social sharing =====
+    document.title = blog.title + ' — Vocalinty'
+
+    function setMeta(attr, key, content) {
+      var selector = 'meta[' + attr + '="' + key + '"]'
+      var tag = document.head.querySelector(selector)
+      if (!tag) {
+        tag = document.createElement('meta')
+        tag.setAttribute(attr, key)
+        document.head.appendChild(tag)
+      }
+      tag.setAttribute('content', content)
     }
-  },
-  "image": blog.coverImage || "https://vocalinty.netlify.app/assets/VocalintyLogo2.png",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://vocalinty.netlify.app/blog?id=" + blog.id
-  }
-}
 
-const existingScript = document.getElementById('blog-structured-data')
-if (existingScript) existingScript.remove()
+    var siteBase = 'https://vocalinty.netlify.app'
+    var ogImage = blog.coverImage || (siteBase + '/assets/VocalintyLogo2.png')
+    var ogUrl = window.location.href
 
-const script = document.createElement('script')
-script.type = 'application/ld+json'
-script.id = 'blog-structured-data'
-script.textContent = JSON.stringify(structuredData)
-document.head.appendChild(script)
+    setMeta('name', 'description', blog.excerpt || blog.title)
+    setMeta('property', 'og:title', blog.title)
+    setMeta('property', 'og:description', blog.excerpt || blog.title)
+    setMeta('property', 'og:type', 'article')
+    setMeta('property', 'og:url', ogUrl)
+    setMeta('property', 'og:image', ogImage)
+    setMeta('property', 'og:site_name', 'Vocalinty')
+    setMeta('property', 'article:published_time', blog.createdAt)
+    setMeta('name', 'twitter:card', 'summary_large_image')
+    setMeta('name', 'twitter:title', blog.title)
+    setMeta('name', 'twitter:description', blog.excerpt || blog.title)
+    setMeta('name', 'twitter:image', ogImage)
+
+    // ===== SEO: Schema.org structured data for Google rich results =====
+    var structuredData = {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      'headline': blog.title,
+      'description': blog.excerpt || blog.title,
+      'datePublished': blog.createdAt,
+      'dateModified': blog.updatedAt || blog.createdAt,
+      'author': {
+        '@type': 'Organization',
+        'name': 'Vocalinty',
+        'url': siteBase
+      },
+      'publisher': {
+        '@type': 'Organization',
+        'name': 'Vocalinty',
+        'logo': {
+          '@type': 'ImageObject',
+          'url': siteBase + '/assets/VocalintyLogo2.png'
+        }
+      },
+      'image': ogImage,
+      'mainEntityOfPage': {
+        '@type': 'WebPage',
+        '@id': ogUrl
+      }
+    }
+
+    var existingSchema = document.getElementById('blog-structured-data')
+    if (existingSchema) existingSchema.remove()
+
+    var schemaScript = document.createElement('script')
+    schemaScript.type = 'application/ld+json'
+    schemaScript.id = 'blog-structured-data'
+    schemaScript.textContent = JSON.stringify(structuredData)
+    document.head.appendChild(schemaScript)
+
+    // ===== Adsterra Native Banner ad injection (unchanged) =====
     // Inject the Adsterra Native Banner ad into the placeholder.
     // We can't use innerHTML for scripts (browsers don't execute them),
     // so we create the script element manually.
