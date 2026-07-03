@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vocalinty — Privacy Policy</title>
+  <meta name="description" content="Privacy Policy for the Vocalinty website.">
+  <link rel="icon" type="image/png" href="assets/VocalintyLogo2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div id="site-header"></div>
+    <main id="info-page"></main>
+    <div id="site-footer"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/info.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      window.VocalintyLayout.render('privacy')
+      window.VocalintyInfo.render({
+        eyebrow: 'Legal',
+        title: 'Privacy Policy',
+        lastUpdated: 'July 3, 2026',
+        bodyHtml: `
+          <p>
+            Vocalinty (&ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;)
+            operates this website and the related YouTube channel. This Privacy
+            Policy explains what information we collect, how we use it, and the
+            choices you have. By using this site, you agree to the practices
+            described below.
+          </p>
+          <h2>Information We Collect</h2>
+          <p>We aim to collect as little information as possible. Specifically:</p>
+          <ul>
+            <li><strong>Browsing data:</strong> When you visit a blog entry, we increment a view counter stored in our database. This is an anonymous aggregate — we do not link it to your name, email, IP address, or any other identifier.</li>
+            <li><strong>Search queries:</strong> The search bar filters articles locally in your browser. Your search terms are never sent to our server.</li>
+            <li><strong>Voluntary contact:</strong> If you contact us via the Contact page or social media, we receive whatever information you choose to share (such as your name, email, and message).</li>
+          </ul>
+          <h2>Third-Party Embeds</h2>
+          <p>Some blog entries embed content from third-party services:</p>
+          <ul>
+            <li><strong>Spotify:</strong> Playlist, album, and track embeds are served from <code>open.spotify.com</code>. Spotify may set cookies and collect data about your interaction with the embed. See Spotify's Privacy Policy for details.</li>
+            <li><strong>YouTube:</strong> Links to YouTube videos direct you to YouTube's service, which has its own Privacy Policy.</li>
+            <li><strong>Image hosts:</strong> Cover images may be loaded from third-party image services (such as Unsplash) that may log requests.</li>
+          </ul>
+          <p>We do not control the data practices of these third parties. We encourage you to review their privacy policies. Any removal of content can be removed by contacting us immediately!</p>
+          <h2>Cookies</h2>
+          <p>This site does not set its own tracking or advertising cookies. Third-party embeds (above) may set their own cookies.</p>
+          <h2>Your Rights</h2>
+          <p>Because we do not collect personal identifiers tied to individual visitors, most data-rights requests (access, deletion, correction) do not apply to anonymous browsing data. If you have contacted us directly and want your message deleted, email us and we will remove it from our records.</p>
+          <h2>Changes to This Policy</h2>
+          <p>We may update this Privacy Policy from time to time. The &ldquo;Last updated&rdquo; date at the top of this page reflects the most recent revision. Continued use of the site after changes constitutes acceptance of the updated policy.</p>
+          <h2>Contact</h2>
+          <p>Questions about this Privacy Policy can be sent through the <a href="contact.html">Contact page</a> or via our social channels.</p>
+        `,
+      })
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vocalinty — A Channel Journal</title>
+  <meta name="description" content="Daily Viral News On Music. Music Playlists. Everythere Here! Essays, notes, and behind-the-scenes writing from the Vocalinty YouTube channel.">
+  <link rel="icon" type="image/png" href="assets/VocalintyLogo2.png">
+  <link rel="apple-touch-icon" href="assets/VocalintyLogo2.png">
+  <!-- Playfair Display for serif headings -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div id="site-header"></div>
+
+    <main>
+      <div class="container">
+        <!-- Hero -->
+        <section class="hero">
+          <div class="hero__eyebrow">A Channel Journal</div>
+          <h1 class="hero__title">
+            Find out more in<br>
+            the world of <em>music</em>.
+          </h1>
+          <p class="hero__sub">
+            Daily Viral News On Music. Music Playlists. Everythere Here!
+          </p>
+        </section>
+
+        <!-- Archive controls -->
+        <div class="archive-controls">
+          <div class="archive-title">
+            <span>The Archive</span>
+            <span class="archive-count" id="archive-count">…</span>
+          </div>
+          <div class="archive-right">
+            <div class="search">
+              <span class="search__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              </span>
+              <input
+                type="text"
+                id="search-input"
+                class="search__input"
+                placeholder="Search articles…"
+                aria-label="Search articles"
+              >
+              <button class="search__clear" id="search-clear" style="display:none" aria-label="Clear search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              </button>
+            </div>
+            <div class="sort-toggle">
+              <button class="sort-btn is-active" data-sort="views">Most viewed</button>
+              <button class="sort-btn" data-sort="latest">Latest</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog list -->
+        <div id="blog-list"></div>
+      </div>
+    </main>
+
+    <div id="site-footer"></div>
+  </div>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/home.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      window.VocalintyLayout.render('home')
+      window.VocalintyHome.init()
+    })
+  </script>
+</body>
+</html>

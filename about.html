@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vocalinty — About Us</title>
+  <meta name="description" content="About Vocalinty — a music-first channel and journal.">
+  <link rel="icon" type="image/png" href="assets/VocalintyLogo2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div id="site-header"></div>
+    <main id="info-page"></main>
+    <div id="site-footer"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/info.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      window.VocalintyLayout.render('about')
+      const s = window.VOCALINTY_CONFIG.social
+      window.VocalintyInfo.render({
+        eyebrow: 'About',
+        title: 'About Vocalinty',
+        bodyHtml: `
+          <p>
+            Vocalinty is a music-theme channel and now a journal. We write about the
+            songs, albums, and artists that move us — and we publish the longer
+            thoughts that do not fit in a video description.
+          </p>
+          <h2>What We Do</h2>
+          <p>
+            Our YouTube channel posts music content, from viral hits to
+            under-the-radar finds. This website is the written companion: a
+            place for daily updates, curated playlists, and the latest viral news all in
+            one place.
+          </p>
+          <h2>Connect</h2>
+          <p>
+            You can find us on every major platform:
+          </p>
+          <ul>
+            <li><a href="${s.youtube}" target="_blank" rel="noopener noreferrer">YouTube — @vocalinty</a></li>
+            <li><a href="${s.instagram}" target="_blank" rel="noopener noreferrer">Instagram — @vocalinty</a></li>
+            <li><a href="${s.spotify}" target="_blank" rel="noopener noreferrer">Spotify — Vocalinty</a></li>
+            <li><a href="${s.tiktok}" target="_blank" rel="noopener noreferrer">TikTok — @vocalinty</a></li>
+          </ul>
+          <h2>Get in Touch</h2>
+          <p>
+            For collaborations, music submissions, or general questions, head
+            to the <a href="contact.html">Contact page</a>.
+          </p>
+        `,
+      })
+    })
+  </script>
+</body>
+</html>

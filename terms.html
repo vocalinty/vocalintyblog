@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vocalinty — Terms of Service</title>
+  <meta name="description" content="Terms of Service for the Vocalinty website.">
+  <link rel="icon" type="image/png" href="assets/VocalintyLogo2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div id="site-header"></div>
+    <main id="info-page"></main>
+    <div id="site-footer"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/info.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      window.VocalintyLayout.render('terms')
+      window.VocalintyInfo.render({
+        eyebrow: 'Legal',
+        title: 'Terms of Service',
+        lastUpdated: 'July 3, 2026',
+        bodyHtml: `
+          <p>These Terms of Service (&ldquo;Terms&rdquo;) govern your use of the Vocalinty website and any related content. By accessing this site, you agree to be bound by these Terms. If you do not agree, please do not use the site.</p>
+          <h2>Use of the Site</h2>
+          <p>You may browse, read, and share blog content for personal, non-commercial purposes. You may not:</p>
+          <ul>
+            <li>Republish or redistribute blog content without attribution;</li>
+            <li>Attempt to gain unauthorized access to the admin panel or database;</li>
+            <li>Use automated tools to scrape, spam, or overload the site or its APIs;</li>
+            <li>Interfere with the proper functioning of view counters, search, or other features;</li>
+            <li>Embed or hotlink to this site's content in a way that implies false affiliation with Vocalinty.</li>
+          </ul>
+          <h2>Content Ownership</h2>
+          <p>All original blog content published on this site — including articles, excerpts, titles, and original artwork — is owned by Vocalinty and protected by applicable copyright laws. Third-party content (Spotify playlists, YouTube videos, stock images) remains the property of its respective owners and is used here under their applicable terms.</p>
+          <h2>Embeds and Third-Party Content</h2>
+          <p>Spotify playlists, YouTube videos, and other third-party embeds included in blog entries are governed by the terms of service of their respective platforms. Vocalinty does not endorse and is not responsible for the content of third-party embeds. Your interaction with third-party services is solely between you and that service.</p>
+          <h2>Disclaimer of Warranties</h2>
+          <p>The site and its content are provided &ldquo;as is&rdquo; without warranties of any kind, express or implied. We do not guarantee that the site will be available at all times, free of errors, or compatible with every device. Music recommendations, playlist links, and opinions expressed in blog entries are subjective and should not be taken as professional advice.</p>
+          <h2>Limitation of Liability</h2>
+          <p>To the fullest extent permitted by law, Vocalinty shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of, or inability to use, this site. This includes, but is not limited to, loss of data, loss of revenue, or damage to your device.</p>
+          <h2>View Counts and Good Faith</h2>
+          <p>View counts shown on blog entries are incremented on each visit. They are intended as a general popularity indicator, not a precise metric. We may periodically adjust counts to remove obvious automated or fraudulent traffic without prior notice.</p>
+          <h2>Admin Access</h2>
+          <p>Only authorized administrators may publish, edit, or delete blog entries. Any attempt to circumvent these controls is a violation of these Terms and may be reported to the relevant authorities.</p>
+          <h2>Changes to These Terms</h2>
+          <p>We may update these Terms from time to time. The &ldquo;Last updated&rdquo; date at the top of this page reflects the most recent revision. Continued use of the site after changes constitutes acceptance of the updated Terms.</p>
+          <h2>Contact</h2>
+          <p>Questions about these Terms can be sent through the <a href="contact.html">Contact page</a> or via our social channels.</p>
+        `,
+      })
+    })
+  </script>
+</body>
+</html>
